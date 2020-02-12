@@ -1,0 +1,10 @@
+package edu.duke.ece651.sallysstash;
+
+public class InputHandler {
+  private String input;
+  private String Input;
+
+  public InputHandler(String myinput) {
+    this.input = myinput;
+  }
+}

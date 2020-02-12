@@ -5,6 +5,7 @@ public class Pixel {
   private int is_hitted;
   private int is_missed;
   private char color;
+  private int id;
   // private Shape shape;
   // private int start_x;
   // private int start_y;
@@ -15,6 +16,7 @@ public class Pixel {
 
   public void setOccupied(int i) {
     this.is_occupied = i;
+    System.out.print("set occupied\n");
   }
   public void setHitted(int i) {
     this.is_hitted = i;
@@ -24,6 +26,9 @@ public class Pixel {
   }
   public void setColor(char c) {
     this.color = c;
+  }
+  public void setID(int i) {
+    this.id = i;
   }
 
   public int getOccupied() {
@@ -37,6 +42,9 @@ public class Pixel {
   }
   public char getColor() {
     return this.color;
+  }
+  public int getID() {
+    return this.id;
   }
   /*
   public void setShape(Shape myshape) {

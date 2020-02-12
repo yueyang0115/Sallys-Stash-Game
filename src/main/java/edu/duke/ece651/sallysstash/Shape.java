@@ -10,7 +10,7 @@ class Rectangle implements Shape {
   char color;
   int id;
 
-  public Rectangle(int mywidth, int myheight, char mycolor, int myid) {
+  public Rectangle(int myheight, int mywidth, char mycolor, int myid) {
     this.width = mywidth;
     this.height = myheight;
     this.color = mycolor;
@@ -23,6 +23,7 @@ class Rectangle implements Shape {
       for (int j = 0; j < width; j++) {
         board.getPixel(x + i, y + j).setOccupied(1);
         board.getPixel(x + i, y + j).setColor(color);
+        board.getPixel(x + i, y + j).setID(id);
       }
     }
   }

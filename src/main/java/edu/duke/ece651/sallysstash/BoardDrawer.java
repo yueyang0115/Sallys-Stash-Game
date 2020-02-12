@@ -23,7 +23,8 @@ public class BoardDrawer {
         + "\t\t\t"
         + "    Player B's tree");
     System.out.print("\n");
-    for (int i = 0; i < board_one.getLength(); i++) {
+
+    for (int i = 0; i < board_one.getHeighth(); i++) {
       char temp = (char) ('A' + i);
       System.out.print(temp + "|");
       drawer_one.toSelf(i);
@@ -35,7 +36,7 @@ public class BoardDrawer {
 
   public void DrawoneBoard() {
     System.out.print("      Your tree\n");
-    for (int i = 0; i < board_one.getLength(); i++) {
+    for (int i = 0; i < board_one.getHeighth(); i++) {
       char temp = (char) ('A' + i);
       System.out.print(temp + "|");
       drawer_one.toSelf(i);

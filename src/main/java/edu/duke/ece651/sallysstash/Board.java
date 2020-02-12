@@ -2,14 +2,14 @@ package edu.duke.ece651.sallysstash;
 
 public class Board {
   private Pixel[][] board;
-  private int length;
+  private int heighth;
   private int width;
 
   public Board() {
-    length = 20;
+    heighth = 20;
     width = 10;
-    board = new Pixel[length][width];
-    for (int i = 0; i < length; i++) {
+    board = new Pixel[heighth][width];
+    for (int i = 0; i < heighth; i++) {
       for (int j = 0; j < width; j++) {
         board[i][j] = new Pixel();
       }
@@ -20,8 +20,8 @@ public class Board {
     return board[x][y];
   }
 
-  public int getLength() {
-    return this.length;
+  public int getHeighth() {
+    return this.heighth;
   }
   public int getWidth() {
     return this.width;

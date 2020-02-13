@@ -1,45 +1,32 @@
 package edu.duke.ece651.sallysstash;
 
 public class BoardDrawer {
-  private Board board_one;
-  private Board board_two;
-  private LineDrawer drawer_one;
-  private LineDrawer drawer_two;
+  public static void drawTwo(Board board_A, Board board_B, char c) {
+    LineDrawer drawer_A = new LineDrawer(board_A);
+    LineDrawer drawer_B = new LineDrawer(board_B);
 
-  public BoardDrawer(Board myboard_one, Board myboard_two) {
-    this.board_one = myboard_one;
-    this.board_two = myboard_two;
-    drawer_one = new LineDrawer(myboard_one);
-    drawer_two = new LineDrawer(myboard_two);
-  }
-
-  public BoardDrawer(Board myboard_one) {
-    this.board_one = myboard_one;
-    drawer_one = new LineDrawer(myboard_one);
-  }
-
-  public void DrawtwoBoard() {
     System.out.print("      Your tree"
         + "\t\t\t"
-        + "    Player B's tree");
+        + "    Player " + c + "'s tree");
     System.out.print("\n");
 
-    for (int i = 0; i < board_one.getHeighth(); i++) {
+    for (int i = 0; i < board_A.getHeighth(); i++) {
       char temp = (char) ('A' + i);
       System.out.print(temp + "|");
-      drawer_one.toSelf(i);
+      drawer_A.toSelf(i);
       System.out.print(temp + "\t\t" + temp + "|");
-      drawer_two.toOther(i);
+      drawer_B.toOther(i);
       System.out.print(temp + "\n");
     }
   }
 
-  public void DrawoneBoard() {
+  public static void drawOne(Board board) {
+    LineDrawer drawer = new LineDrawer(board);
     System.out.print("      Your tree\n");
-    for (int i = 0; i < board_one.getHeighth(); i++) {
+    for (int i = 0; i < board.getHeighth(); i++) {
       char temp = (char) ('A' + i);
       System.out.print(temp + "|");
-      drawer_one.toSelf(i);
+      drawer.toSelf(i);
       System.out.print(temp + "\n");
     }
   }

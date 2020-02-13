@@ -26,6 +26,4 @@ public class Board {
   public int getWidth() {
     return this.width;
   }
-
-  public void moveStack(int i, int j) {}
 }

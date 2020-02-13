@@ -8,21 +8,21 @@ public class ShapeAdapter {
   static {
     RectangleMap = new HashMap<String, int[]>();
     int[] gHpair = {1, 2};
-    RectangleMap.put("gH", gHpair);
+    RectangleMap.put("GH", gHpair);
     int[] gVpair = {2, 1};
-    RectangleMap.put("gV", gVpair);
+    RectangleMap.put("GV", gVpair);
     int[] pHpair = {1, 3};
-    RectangleMap.put("pH", pHpair);
+    RectangleMap.put("PH", pHpair);
     int[] pVpair = {3, 1};
-    RectangleMap.put("pV", pVpair);
+    RectangleMap.put("PV", pVpair);
     int[] rHpair = {1, 4};
-    RectangleMap.put("rH", rHpair);
+    RectangleMap.put("RH", rHpair);
     int[] rVpair = {4, 1};
-    RectangleMap.put("rV", rVpair);
+    RectangleMap.put("RV", rVpair);
     int[] bHpair = {1, 6};
-    RectangleMap.put("bH", bHpair);
+    RectangleMap.put("BH", bHpair);
     int[] bVpair = {6, 1};
-    RectangleMap.put("bV", bVpair);
+    RectangleMap.put("BV", bVpair);
   }
 
   public static int getHeight(String shape) {
@@ -48,11 +48,12 @@ public class ShapeAdapter {
     int is_valid = 0;
 
     if ((x >= 0 && x < board.getHeighth())
-        && ((x + height) >= 0 && (x + height) < board.getHeighth())
+        && ((x + height - 1) >= 0 && (x + height - 1) < board.getHeighth())
         && (y >= 0 && y < board.getWidth())
-        && ((y + width) >= 0 && (y + width) < board.getWidth())) {
+        && ((y + width - 1) >= 0 && (y + width - 1) < board.getWidth())) {
       is_valid = 1;
     }
+
     System.out.println("location_valid in shapeadapter after bound check=" + is_valid);
     if (is_valid == 1) {
       for (int i = 0; i < height; i++) {
@@ -64,6 +65,7 @@ public class ShapeAdapter {
         }
       }
     }
+
     System.out.println("location_valid in shapeadapter=" + is_valid);
     return is_valid;
   }

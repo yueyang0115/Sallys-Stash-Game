@@ -1,22 +1,21 @@
 package edu.duke.ece651.sallysstash;
-
 import java.util.Scanner;
-
-public class Game {
-  public static void main(String[] args) {
-    System.out.println("This is my main method!\n");
-    int id = 0;
-    Board board_A = new Board();
-    Board board_B = new Board();
-
-    BoardDrawer.drawOne(board_A);
-    putStack(2, 'G', id, board_A);
-    putStack(3, 'P', id, board_A);
-    putStack(3, 'R', id, board_A);
-    putStack(2, 'B', id, board_A);
+public class Action {
+  private Board board_A;
+  public Action(Board myboard) {
+    this.board = myboard;
   }
 
-  public static void putStack(int num, char color, int id, Board myboard) {
+  public void putAllStack() {
+    int id = 0;
+    BoardDrawer.drawOne(board);
+    putStack(2, 'G', id);
+    putStack(3, 'P', id);
+    putStack(3, 'R', id);
+    putStack(2, 'B', id);
+  }
+
+  private void putStack(int num, char color, int id) {
     int count = 0;
     while (count != num) {
       Scanner input = new Scanner(System.in);
@@ -37,16 +36,3 @@ public class Game {
         id++;
       }
     }
-  }
-}
-
-/*
-  Scanner input = new Scanner(System.in);
-  String myString = input.next();
-  int x = InputHandler.getCoordinateX(myString);
-  int y = InputHandler.getCoordinateY(myString);
-  char direc = InputHandler.getDirection(myString);
-  System.out.println(x);
-  System.out.println(y);
-  System.out.println(direc);
-  */

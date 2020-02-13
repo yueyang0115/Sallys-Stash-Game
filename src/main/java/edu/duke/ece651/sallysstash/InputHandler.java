@@ -42,22 +42,18 @@ public class InputHandler {
 
     if (input.length() == 3) {
       valid_bit_0 = 1;
-      System.out.println("bit_0 =" + valid_bit_0);
     }
     if ((firstchar >= 'A' && firstchar <= 'T') || (firstchar >= 'a' && firstchar <= 't')) {
       valid_bit_1 = 1;
-      System.out.println("bit_1 =" + valid_bit_1);
     }
     if (secondchar >= '0' && secondchar <= '9') {
       valid_bit_2 = 1;
-      System.out.println("bit_2 =" + valid_bit_2);
     }
     if (thirdchar == 'h' || thirdchar == 'H' || thirdchar == 'v' || thirdchar == 'V') {
       valid_bit_3 = 1;
-      System.out.println("bit_3=" + valid_bit_3);
     }
     this.bit_valid = valid_bit_0 & valid_bit_1 & valid_bit_2 & valid_bit_3;
-    System.out.println("bit_valid =" + bit_valid);
+    System.out.println("bit_valid in bit check=" + bit_valid);
   }
 
   private void ParseInput() {

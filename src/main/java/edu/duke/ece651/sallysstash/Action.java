@@ -10,6 +10,7 @@ public class Action {
   public void putAllStack(char name, char oppo_name) {
     int id = 0;
     myUtils.WELCOME(name, oppo_name);
+    BoardDrawer.drawOne(this.board);
     putStack(2, 'G', id, name, "Green");
     putStack(3, 'P', id, name, "Purple");
     putStack(3, 'R', id, name, "Red");
@@ -19,7 +20,6 @@ public class Action {
   private void putStack(int num, char color, int id, char name, String colorname) {
     int count = 0;
     while (count != num) {
-      BoardDrawer.drawOne(this.board);
       myUtils.ASK_PUT(name, colorname);
       Scanner input = new Scanner(System.in);
       String myString = input.next();
@@ -31,6 +31,7 @@ public class Action {
         stack.putonBoard(myhandler.getCoordinateX(), myhandler.getCoordinateY(), this.board);
         count++;
         id++;
+        BoardDrawer.drawOne(this.board);
       }
     }
   }

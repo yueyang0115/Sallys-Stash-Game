@@ -13,8 +13,8 @@ public class myUtils {
   }
 
   public static void HIT_WELCOME(char name, char oppo_name) {
-    System.out.print("\nPlayer " + name + ", you are going hit Sally’s stash on Player " + oppo_name
-        + "'s board. Make sure Player " + oppo_name + " isn’t looking!\n");
+    System.out.print("\nPlayer " + name + ", you are going look for Sally’s stash on Player "
+        + oppo_name + "'s board. Make sure Player " + oppo_name + " isn’t looking!\n");
   }
   public static void ASK_HIT(char name, char oppo_name) {
     System.out.print(

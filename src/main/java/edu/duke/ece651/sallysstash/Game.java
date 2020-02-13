@@ -11,14 +11,15 @@ public class Game {
     player_B.putAllStack('B', 'A');
     int count_A = 0;
     int count_B = 0;
-    while ((count_A != 37) && (count_B != 37)) {
+    int total = 37;
+    while ((count_A != total) && (count_B != total)) {
       count_A += player_A.hitBoard(board_B, 'A', 'B');
-      if (count_A == 37) {
+      if (count_A == total) {
         myUtils.IS_WIN('A');
         break;
       }
       count_B += player_B.hitBoard(board_A, 'B', 'A');
-      if (count_B == 37) {
+      if (count_B == total) {
         myUtils.IS_WIN('B');
       }
     }

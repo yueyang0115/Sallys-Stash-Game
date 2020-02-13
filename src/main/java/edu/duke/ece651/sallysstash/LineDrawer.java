@@ -25,7 +25,7 @@ public class LineDrawer {
     for (int i = 0; i < board.getWidth(); i++) {
       Pixel mypixel = board.getPixel(line, i);
       char mychar = ' ';
-      if (mypixel.getOccupied() == 1 && mypixel.getMissed() == 1) {
+      if (mypixel.getMissed() == 1) {
         mychar = 'X';
       }
       if (mypixel.getOccupied() == 1 && mypixel.getHitted() == 1) {

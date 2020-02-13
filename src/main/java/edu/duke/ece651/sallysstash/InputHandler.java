@@ -17,16 +17,32 @@ public class InputHandler {
   private int location_valid;
   private int is_valid;
 
-  public InputHandler(String myinput, char mycolor, Board myboard) {
+  public InputHandler(String myinput, Board myboard) {
     this.input = myinput;
-    this.color = mycolor;
     this.board = myboard;
     this.bit_valid = 0;
     this.location_valid = 0;
+  }
+
+  public void CheckThreeBits(char mycolor) {
+    this.color = mycolor;
     BitCheck();
     if (this.bit_valid == 1) {
       ParseInput();
       LocationCheck();
+    }
+    this.is_valid = this.bit_valid & this.location_valid;
+  }
+
+  public void CheckTwoBits() {
+    this.input += 'V';
+    BitCheck();
+    if (this.bit_valid == 1) {
+      ParseInput();
+      if ((coordinate_x >= 0 && coordinate_x < board.getHeighth())
+          && (coordinate_y >= 0 && coordinate_y < board.getWidth())) {
+        this.location_valid = 1;
+      }
     }
     this.is_valid = this.bit_valid & this.location_valid;
   }

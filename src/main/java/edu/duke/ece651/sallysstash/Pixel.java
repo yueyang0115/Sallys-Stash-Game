@@ -16,7 +16,6 @@ public class Pixel {
 
   public void setOccupied(int i) {
     this.is_occupied = i;
-    System.out.print("set occupied\n");
   }
   public void setHitted(int i) {
     this.is_hitted = i;

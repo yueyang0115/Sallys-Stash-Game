@@ -6,28 +6,25 @@ public class Action {
     this.board = myboard;
   }
 
-  public void putAllStack() {
+  public void putAllStack(String player_A, String player_B) {
     int id = 0;
     BoardDrawer.drawOne(this.board);
-    putStack(2, 'G', id);
-    putStack(3, 'P', id);
-    putStack(3, 'R', id);
-    putStack(2, 'B', id);
+    myUtils.WELCOME(player_A, player_B);
+    putStack(2, 'G', id, player_A, "Green");
+    putStack(3, 'P', id, player_A, "Purple");
+    putStack(3, 'R', id, player_A, "Red");
+    putStack(2, 'B', id, player_A, "Blue");
   }
 
-  private void putStack(int num, char color, int id) {
+  private void putStack(int num, char color, int id, String player, String colorname) {
     int count = 0;
     while (count != num) {
+      myUtils.ASK_PUT(player, colorname);
       Scanner input = new Scanner(System.in);
       String myString = input.next();
 
       InputHandler myhandler = new InputHandler(myString, color, this.board);
-      System.out.println("myhandler.getValid=" + myhandler.getValid());
       if (myhandler.getValid() == 1) {
-        System.out.println("myhandler.getX=" + myhandler.getCoordinateX());
-        System.out.println("myhandler.getY=" + myhandler.getCoordinateY());
-        System.out.println("myhandler.getHeight=" + myhandler.getHeight());
-        System.out.println("myhandler.getWidth=" + myhandler.getWidth());
         Rectangle stack = new Rectangle(myhandler.getHeight(), myhandler.getWidth(), color, id);
         stack.putonBoard(myhandler.getCoordinateX(), myhandler.getCoordinateY(), this.board);
 
@@ -37,4 +34,6 @@ public class Action {
       }
     }
   }
+
+  public void getHitted() {}
 }

@@ -36,24 +36,28 @@ public class InputHandler {
     int valid_bit_1 = 0;
     int valid_bit_2 = 0;
     int valid_bit_3 = 0;
-    char firstchar = input.charAt(0);
-    char secondchar = input.charAt(1);
-    char thirdchar = input.charAt(2);
 
     if (input.length() == 3) {
       valid_bit_0 = 1;
     }
-    if ((firstchar >= 'A' && firstchar <= 'T') || (firstchar >= 'a' && firstchar <= 't')) {
-      valid_bit_1 = 1;
-    }
-    if (secondchar >= '0' && secondchar <= '9') {
-      valid_bit_2 = 1;
-    }
-    if (thirdchar == 'h' || thirdchar == 'H' || thirdchar == 'v' || thirdchar == 'V') {
-      valid_bit_3 = 1;
+    if (valid_bit_0 == 1) {
+      char firstchar = input.charAt(0);
+      char secondchar = input.charAt(1);
+      char thirdchar = input.charAt(2);
+      if ((firstchar >= 'A' && firstchar <= 'T') || (firstchar >= 'a' && firstchar <= 't')) {
+        valid_bit_1 = 1;
+      }
+      if (secondchar >= '0' && secondchar <= '9') {
+        valid_bit_2 = 1;
+      }
+      if (thirdchar == 'h' || thirdchar == 'H' || thirdchar == 'v' || thirdchar == 'V') {
+        valid_bit_3 = 1;
+      }
     }
     this.bit_valid = valid_bit_0 & valid_bit_1 & valid_bit_2 & valid_bit_3;
-    System.out.println("bit_valid in bit check=" + bit_valid);
+    if (bit_valid == 0) {
+      System.out.println("\nInvalid input, please retype!");
+    }
   }
 
   private void ParseInput() {
@@ -69,7 +73,6 @@ public class InputHandler {
     this.location_valid = ShapeAdapter.LocationCheck(coordinate_x, coordinate_y, shape, board);
     this.height = ShapeAdapter.getHeight(this.shape);
     this.width = ShapeAdapter.getWidth(this.shape);
-    System.out.println("location_valid=" + location_valid);
   }
 
   public int getCoordinateX() {

@@ -1,6 +1,5 @@
 package edu.duke.ece651.sallysstash;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ShapeAdapter {
@@ -41,6 +40,7 @@ public class ShapeAdapter {
       int width = getWidth(shape);
       is_valid = CheckRectangle(coordinate_x, coordinate_y, height, width, board);
     }
+
     return is_valid;
   }
 
@@ -53,20 +53,25 @@ public class ShapeAdapter {
         && ((y + width - 1) >= 0 && (y + width - 1) < board.getWidth())) {
       is_valid = 1;
     }
+    if (is_valid == 0) {
+      System.out.println("\nInvalid location, stack goes off the grid. Please retype!");
+    }
 
-    System.out.println("location_valid in shapeadapter after bound check=" + is_valid);
     if (is_valid == 1) {
       for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
           if (board.getPixel(x + i, y + j).getOccupied() == 1) {
             is_valid = 0;
-            System.out.println("there is already a block!");
           }
         }
       }
+
+      if (is_valid == 0) {
+        System.out.println(
+            "\nInvalid location, stack collides with other stacks on board. Please retype!");
+      }
     }
 
-    System.out.println("location_valid in shapeadapter=" + is_valid);
     return is_valid;
   }
 }

@@ -12,9 +12,9 @@ public class Action {
     myUtils.WELCOME(name, oppo_name);
     BoardDrawer.drawOne(this.board);
     putStack(2, 'G', id, name, "Green");
-    putStack(3, 'P', id, name, "Purple");
-    putStack(3, 'R', id, name, "Red");
-    putStack(2, 'B', id, name, "Blue");
+    // putStack(3, 'P', id, name, "Purple");
+    // putStack(3, 'R', id, name, "Red");
+    // putStack(2, 'B', id, name, "Blue");
   }
 
   private void putStack(int num, char color, int id, char name, String colorname) {
@@ -23,16 +23,20 @@ public class Action {
       myUtils.ASK_PUT(name, colorname);
       Scanner input = new Scanner(System.in);
       String myString = input.next();
-
       InputHandler myhandler = new InputHandler(myString, this.board);
-      myhandler.CheckThreeBits(color);
-      if (myhandler.getValid() == 1) {
-        Rectangle stack = new Rectangle(myhandler.getHeight(), myhandler.getWidth(), color, id);
-        stack.putonBoard(myhandler.getCoordinateX(), myhandler.getCoordinateY(), this.board);
-        count++;
-        id++;
-        BoardDrawer.drawOne(this.board);
+      myhandler.CheckThreeBits();
+      if (myhandler.getValid() == 0) {
+        continue;
       }
+
+      ShapeAdapter myadapter = new ShapeAdapter(myhandler.getCoordinateX(),
+          myhandler.getCoordinateY(), color, myhandler.getDirection(), this.board, id);
+      if (myadapter.getValid() == 0) {
+        continue;
+      }
+      count++;
+      id++;
+      BoardDrawer.drawOne(this.board);
     }
   }
 
@@ -48,18 +52,20 @@ public class Action {
       String myString = input.next();
       InputHandler myhandler = new InputHandler(myString, oppo_board);
       myhandler.CheckTwoBits();
-      if (myhandler.getValid() == 1) {
-        Pixel mypixel = oppo_board.getPixel(myhandler.getCoordinateX(), myhandler.getCoordinateY());
-        if (mypixel.getOccupied() == 1) {
-          mypixel.setHitted(1);
-          hit_flag = 1;
-          myUtils.IS_HIT();
-        } else {
-          mypixel.setMissed(1);
-          myUtils.IS_MISS();
-        }
-        num++;
+      if (myhandler.getValid() == 0) {
+        continue;
       }
+
+      Pixel mypixel = oppo_board.getPixel(myhandler.getCoordinateX(), myhandler.getCoordinateY());
+      if (mypixel.getOccupied() == 1) {
+        mypixel.setHitted(1);
+        hit_flag = 1;
+        myUtils.IS_HIT();
+      } else {
+        mypixel.setMissed(1);
+        myUtils.IS_MISS();
+      }
+      num++;
     }
     return hit_flag;
   }

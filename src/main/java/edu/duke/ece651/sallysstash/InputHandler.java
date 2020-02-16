@@ -2,52 +2,34 @@ package edu.duke.ece651.sallysstash;
 
 public class InputHandler {
   private String input;
-  private char color;
   private Board board;
 
   private int coordinate_x;
   private int coordinate_y;
   private char direction;
-  private String shape;
-
-  private int height;
-  private int width;
-
-  private int bit_valid;
-  private int location_valid;
   private int is_valid;
 
   public InputHandler(String myinput, Board myboard) {
     this.input = myinput;
     this.board = myboard;
-    this.bit_valid = 0;
-    this.location_valid = 0;
-  }
-
-  public void CheckThreeBits(char mycolor) {
-    this.color = mycolor;
-    BitCheck();
-    if (this.bit_valid == 1) {
-      ParseInput();
-      LocationCheck();
-    }
-    this.is_valid = this.bit_valid & this.location_valid;
+    this.is_valid = 0;
   }
 
   public void CheckTwoBits() {
     this.input += 'V';
-    BitCheck();
-    if (this.bit_valid == 1) {
-      ParseInput();
+    int location_valid = 0;
+
+    CheckThreeBits();
+    if (this.is_valid == 1) {
       if ((coordinate_x >= 0 && coordinate_x < board.getHeighth())
           && (coordinate_y >= 0 && coordinate_y < board.getWidth())) {
-        this.location_valid = 1;
+        location_valid = 1;
       }
     }
-    this.is_valid = this.bit_valid & this.location_valid;
+    this.is_valid = this.is_valid & location_valid;
   }
 
-  private void BitCheck() {
+  public void CheckThreeBits() {
     int valid_bit_0 = 0;
     int valid_bit_1 = 0;
     int valid_bit_2 = 0;
@@ -57,38 +39,27 @@ public class InputHandler {
       valid_bit_0 = 1;
     }
     if (valid_bit_0 == 1) {
-      char firstchar = input.charAt(0);
+      char firstchar = Character.toUpperCase(input.charAt(0));
       char secondchar = input.charAt(1);
-      char thirdchar = input.charAt(2);
-      if ((firstchar >= 'A' && firstchar <= 'T') || (firstchar >= 'a' && firstchar <= 't')) {
+      char thirdchar = Character.toUpperCase(input.charAt(2));
+
+      if (firstchar >= 'A' && firstchar <= 'T') {
         valid_bit_1 = 1;
+        this.coordinate_x = firstchar - 'A';
       }
       if (secondchar >= '0' && secondchar <= '9') {
         valid_bit_2 = 1;
+        this.coordinate_y = secondchar - '0';
       }
-      if (thirdchar == 'h' || thirdchar == 'H' || thirdchar == 'v' || thirdchar == 'V') {
+      if (thirdchar == 'H' || thirdchar == 'V') {
         valid_bit_3 = 1;
+        this.direction = thirdchar;
       }
     }
-    this.bit_valid = valid_bit_0 & valid_bit_1 & valid_bit_2 & valid_bit_3;
-    if (bit_valid == 0) {
+    this.is_valid = valid_bit_0 & valid_bit_1 & valid_bit_2 & valid_bit_3;
+    if (is_valid == 0) {
       System.out.println("\nInvalid input, please retype!");
     }
-  }
-
-  private void ParseInput() {
-    String temp = input.substring(0).toUpperCase();
-    this.coordinate_x = temp.charAt(0) - 'A';
-    this.coordinate_y = input.charAt(1) - '0';
-    String temp_str = input.substring(2).toUpperCase();
-    this.direction = temp_str.charAt(0);
-    this.shape = Character.toString(color) + Character.toString(this.direction);
-  }
-
-  private void LocationCheck() {
-    this.location_valid = ShapeAdapter.LocationCheck(coordinate_x, coordinate_y, shape, board);
-    this.height = ShapeAdapter.getHeight(this.shape);
-    this.width = ShapeAdapter.getWidth(this.shape);
   }
 
   public int getCoordinateX() {
@@ -102,11 +73,5 @@ public class InputHandler {
   }
   public int getValid() {
     return this.is_valid;
-  }
-  public int getHeight() {
-    return this.height;
-  }
-  public int getWidth() {
-    return this.width;
   }
 }

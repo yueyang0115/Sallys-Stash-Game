@@ -24,27 +24,40 @@ public class ShapeAdapter {
     RectangleMap.put("BV", bVpair);
   }
 
-  public static int getHeight(String shape) {
-    int height = RectangleMap.get(shape)[0];
-    return height;
-  }
-  public static int getWidth(String shape) {
-    int width = RectangleMap.get(shape)[1];
-    return width;
+  private int x;
+  private int y;
+  private char color;
+  private char direction;
+  private String shape;
+  private Board board;
+  private int id;
+  private int is_valid;
+
+  public ShapeAdapter(int my_x, int my_y, char mycolor, char mydirection, Board myboard, int myid) {
+    this.x = my_x;
+    this.y = my_y;
+    this.color = mycolor;
+    this.direction = mydirection;
+    this.board = myboard;
+    this.shape = Character.toString(this.color) + Character.toString(this.direction);
+    this.id = myid;
+    init();
   }
 
-  public static int LocationCheck(int coordinate_x, int coordinate_y, String shape, Board board) {
-    int is_valid = 0;
+  private void init() {
     if (RectangleMap.get(shape) != null) {
-      int height = getHeight(shape);
-      int width = getWidth(shape);
-      is_valid = CheckRectangle(coordinate_x, coordinate_y, height, width, board);
-    }
+      int height = RectangleMap.get(shape)[0];
+      int width = RectangleMap.get(shape)[1];
 
-    return is_valid;
+      this.is_valid = CheckRectangle(height, width);
+      if (this.is_valid == 1) {
+        Rectangle stack = new Rectangle(height, width, this.color, this.id);
+        stack.putonBoard(this.x, this.y, this.board);
+      }
+    }
   }
 
-  public static int CheckRectangle(int x, int y, int height, int width, Board board) {
+  private int CheckRectangle(int height, int width) {
     int is_valid = 0;
 
     if ((x >= 0 && x < board.getHeighth())
@@ -55,23 +68,24 @@ public class ShapeAdapter {
     }
     if (is_valid == 0) {
       System.out.println("\nInvalid location, stack goes off the grid. Please retype!");
+      return is_valid;
     }
 
-    if (is_valid == 1) {
-      for (int i = 0; i < height; i++) {
-        for (int j = 0; j < width; j++) {
-          if (board.getPixel(x + i, y + j).getOccupied() == 1) {
-            is_valid = 0;
-          }
+    for (int i = 0; i < height; i++) {
+      for (int j = 0; j < width; j++) {
+        if (board.getPixel(x + i, y + j).getOccupied() == 1) {
+          is_valid = 0;
         }
       }
-
-      if (is_valid == 0) {
-        System.out.println(
-            "\nInvalid location, stack collides with other stacks on board. Please retype!");
-      }
     }
-
+    if (is_valid == 0) {
+      System.out.println(
+          "\nInvalid location, stack collides with other stacks on board. Please retype!");
+    }
     return is_valid;
+  }
+
+  public int getValid() {
+    return this.is_valid;
   }
 }

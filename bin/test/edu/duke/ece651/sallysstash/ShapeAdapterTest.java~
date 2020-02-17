@@ -1,0 +1,19 @@
+package edu.duke.ece651.sallysstash;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+public class ShapeAdapterTest {
+  @Test
+  public void test_shapeadapter() {
+    Board myboard = new Board();
+    ShapeAdapter myadapter = new ShapeAdapter(2, 1, 'G', 'H', myboard, 3);
+    assertEquals(myadapter.getValid(), 1);
+    assertEquals(myboard.getPixel(2, 3).getOccupied(), 1);
+
+    ShapeAdapter myadapter_2 = new ShapeAdapter(2, 9, 'G', 'H', myboard, 3);
+    assertEquals(myadapter.getValid(), 1);
+    assertEquals(myboard.getPixel(2, 3).getOccupied(), 1);
+  }
+}

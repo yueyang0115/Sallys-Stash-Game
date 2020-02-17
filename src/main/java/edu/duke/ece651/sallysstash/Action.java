@@ -1,6 +1,6 @@
 package edu.duke.ece651.sallysstash;
 import java.util.Scanner;
-import jdk.nashorn.api.tree.WhileLoopTree;
+
 public class Action {
   private Board board;
   public Action(Board myboard) {
@@ -12,9 +12,9 @@ public class Action {
     myUtils.WELCOME(name, oppo_name);
     BoardDrawer.drawOne(this.board);
     putStack(2, 'G', id, name, "Green");
-    // putStack(3, 'P', id, name, "Purple");
-    // putStack(3, 'R', id, name, "Red");
-    // putStack(2, 'B', id, name, "Blue");
+    putStack(3, 'P', id, name, "Purple");
+    putStack(3, 'R', id, name, "Red");
+    putStack(2, 'B', id, name, "Blue");
   }
 
   private void putStack(int num, char color, int id, char name, String colorname) {
@@ -58,8 +58,10 @@ public class Action {
 
       Pixel mypixel = oppo_board.getPixel(myhandler.getCoordinateX(), myhandler.getCoordinateY());
       if (mypixel.getOccupied() == 1) {
+        if (mypixel.getHitted() != 1) {
+          hit_flag = 1;
+        }
         mypixel.setHitted(1);
-        hit_flag = 1;
         myUtils.IS_HIT();
       } else {
         mypixel.setMissed(1);

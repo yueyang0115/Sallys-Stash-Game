@@ -45,6 +45,7 @@ public class Pixel {
   public int getID() {
     return this.id;
   }
+
   /*
   public void setShape(Shape myshape) {
     this.shape = myshape;

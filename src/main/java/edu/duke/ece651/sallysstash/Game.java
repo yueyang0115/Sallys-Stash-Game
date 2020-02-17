@@ -11,7 +11,7 @@ public class Game {
     player_B.putAllStack('B', 'A');
     int count_A = 0;
     int count_B = 0;
-    int total = 4;
+    int total = 37;
     while ((count_A != total) && (count_B != total)) {
       count_A += player_A.hitBoard(board_B, 'A', 'B');
       if (count_A == total) {

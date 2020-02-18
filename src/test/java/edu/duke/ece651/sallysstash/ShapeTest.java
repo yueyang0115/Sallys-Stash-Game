@@ -23,11 +23,24 @@ public class ShapeTest {
     Rectangle green2 = new Rectangle(3, 5, 'p', 1);
     Board myboard2 = new Board();
     green2.putonBoard(2, 3, myboard2, 1, 1);
+    myboard1.getPixel(6, 6).setColor('g');
     myboard1.getPixel(6, 6).setHitted(1);
     myboard2.getPixel(4, 5).setMissed(1);
     assertEquals(myboard2.getPixel(4, 5).getMissed(), 1);
     myboard2.getPixel(3, 4).setHitted(1);
     assertEquals(myboard2.getPixel(3, 4).getHitted(), 1);
+    assertEquals(myboard1.getPixel(6, 6).getHitted(), 1);
+    assertEquals(myboard1.getPixel(6, 6).getToself(), '*');
+    assertEquals(myboard1.getPixel(6, 6).getToother(), 'g');
+
+    myboard1.getPixel(10, 9).setOccupied(1);
+    myboard1.getPixel(10, 9).setColor('r');
+    myboard1.getPixel(10, 9).setHitted(1);
+    myboard1.getPixel(10, 9).setOccupied(0);
+    myboard1.getPixel(11, 9).setMoveHitted(1);
+    assertEquals(myboard1.getPixel(10, 9).getToself(), ' ');
+    assertEquals(myboard1.getPixel(10, 9).getToother(), 'r');
+    assertEquals(myboard1.getPixel(11, 9).getToself(), '*');
 
     BoardDrawer.drawTwo(myboard1, myboard2, 'B');
     BoardDrawer.drawTwo(myboard2, myboard1, 'A');

@@ -1,0 +1,36 @@
+package edu.duke.ece651.sallysstash;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+public class MoveTest {
+  @Test
+  public void test_move() {
+    Board board = new Board();
+    Rectangle green = new Rectangle(1, 2, 'G', 1);
+    green.putonBoard(3, 3, board, 1, 1);
+
+    ShapeAdapter myadapter_10 = new ShapeAdapter(18, 3, 'R', 'U', board, 4);
+    myadapter_10.Create();
+    ShapeAdapter myadapter_11 = new ShapeAdapter(4, 8, 'R', 'R', board, 4);
+    myadapter_11.Create();
+    ShapeAdapter myadapter_12 = new ShapeAdapter(9, 2, 'R', 'D', board, 4);
+    myadapter_12.Create();
+    ShapeAdapter myadapter_13 = new ShapeAdapter(9, 7, 'R', 'L', board, 4);
+    myadapter_13.Create();
+
+    BoardDrawer.drawOne(board);
+    assertEquals(board.getPixel(3, 3).getOccupied(), 1);
+    assertEquals(board.getPixel(3, 4).getOccupied(), 1);
+    Move mymove = new Move(board);
+    mymove.Clear(3, 3);
+    assertEquals(board.getPixel(3, 3).getOccupied(), 0);
+    assertEquals(board.getPixel(3, 4).getOccupied(), 0);
+    mymove.Clear(19, 3);
+    mymove.Clear(5, 9);
+    mymove.Clear(10, 3);
+    mymove.Clear(9, 7);
+    BoardDrawer.drawOne(board);
+  }
+}

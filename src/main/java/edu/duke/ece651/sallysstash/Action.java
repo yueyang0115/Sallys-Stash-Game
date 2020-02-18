@@ -1,6 +1,5 @@
 package edu.duke.ece651.sallysstash;
 import java.util.Scanner;
-import sun.awt.im.InputContext;
 
 public class Action {
   private Board board;

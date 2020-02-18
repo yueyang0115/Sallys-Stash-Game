@@ -46,7 +46,7 @@ class Rectangle implements Shape {
         order = order_begin + count * order_flip;
         board.getPixel(x + i, y + j).setOrder(order);
         if (hit_set.contains(order)) {
-          board.getPixel(x + i, y + i).setMoveHitted(1);
+          board.getPixel(x + i, y + j).setMoveHitted(1);
         }
         count++;
       }

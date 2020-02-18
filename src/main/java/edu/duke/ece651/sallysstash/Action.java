@@ -11,10 +11,10 @@ public class Action {
     int id = 0;
     myUtils.WELCOME(name, oppo_name);
     BoardDrawer.drawOne(this.board);
-    putStack(2, 'G', id, name, "Green");
-    putStack(3, 'P', id, name, "Purple");
+    // putStack(2, 'G', id, name, "Green");
+    // putStack(3, 'P', id, name, "Purple");
     putStack(3, 'R', id, name, "Red");
-    putStack(2, 'B', id, name, "Blue");
+    putStack(3, 'B', id, name, "Blue");
   }
 
   private void putStack(int num, char color, int id, char name, String colorname) {
@@ -34,6 +34,7 @@ public class Action {
       if (myadapter.getValid() == 0) {
         continue;
       }
+      myadapter.Create();
       count++;
       id++;
       BoardDrawer.drawOne(this.board);

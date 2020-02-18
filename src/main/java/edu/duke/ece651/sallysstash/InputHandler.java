@@ -51,7 +51,8 @@ public class InputHandler {
         valid_bit_2 = 1;
         this.coordinate_y = secondchar - '0';
       }
-      if (thirdchar == 'H' || thirdchar == 'V') {
+      if (thirdchar == 'H' || thirdchar == 'V' || thirdchar == 'U' || thirdchar == 'D'
+          || thirdchar == 'L' || thirdchar == 'R') {
         valid_bit_3 = 1;
         this.direction = thirdchar;
       }

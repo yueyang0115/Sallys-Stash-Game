@@ -3,25 +3,45 @@ package edu.duke.ece651.sallysstash;
 import java.util.HashMap;
 
 public class ShapeAdapter {
-  public static HashMap<String, int[]> RectangleMap;
+  public static HashMap<String, HashMap<int[], int[]>> AllMap;
   static {
-    RectangleMap = new HashMap<String, int[]>();
-    int[] gHpair = {1, 2};
-    RectangleMap.put("GH", gHpair);
-    int[] gVpair = {2, 1};
-    RectangleMap.put("GV", gVpair);
-    int[] pHpair = {1, 3};
-    RectangleMap.put("PH", pHpair);
-    int[] pVpair = {3, 1};
-    RectangleMap.put("PV", pVpair);
-    int[] rHpair = {1, 4};
-    RectangleMap.put("RH", rHpair);
-    int[] rVpair = {4, 1};
-    RectangleMap.put("RV", rVpair);
-    int[] bHpair = {1, 6};
-    RectangleMap.put("BH", bHpair);
-    int[] bVpair = {6, 1};
-    RectangleMap.put("BV", bVpair);
+    AllMap = new HashMap<String, HashMap<int[], int[]>>();
+
+    HashMap<int[], int[]> gHMap = new HashMap<int[], int[]>();
+    gHMap.put(new int[] {0, 0}, new int[] {1, 2});
+    AllMap.put("GH", gHMap);
+
+    HashMap<int[], int[]> gVMap = new HashMap<int[], int[]>();
+    gVMap.put(new int[] {0, 0}, new int[] {2, 1});
+    AllMap.put("GV", gVMap);
+
+    HashMap<int[], int[]> pHMap = new HashMap<int[], int[]>();
+    pHMap.put(new int[] {0, 0}, new int[] {1, 3});
+    AllMap.put("PH", pHMap);
+
+    HashMap<int[], int[]> pVMap = new HashMap<int[], int[]>();
+    pVMap.put(new int[] {0, 0}, new int[] {3, 1});
+    AllMap.put("PV", pVMap);
+
+    HashMap<int[], int[]> rUMap = new HashMap<int[], int[]>();
+    rUMap.put(new int[] {0, 0}, new int[] {1, 1});
+    rUMap.put(new int[] {1, -1}, new int[] {1, 3});
+    AllMap.put("RU", rUMap);
+
+    HashMap<int[], int[]> rRMap = new HashMap<int[], int[]>();
+    rRMap.put(new int[] {0, 0}, new int[] {3, 1});
+    rRMap.put(new int[] {1, 1}, new int[] {1, 1});
+    AllMap.put("RR", rRMap);
+
+    HashMap<int[], int[]> rDMap = new HashMap<int[], int[]>();
+    rDMap.put(new int[] {0, 0}, new int[] {1, 3});
+    rDMap.put(new int[] {1, 1}, new int[] {1, 1});
+    AllMap.put("RD", rDMap);
+
+    HashMap<int[], int[]> rLMap = new HashMap<int[], int[]>();
+    rLMap.put(new int[] {0, 0}, new int[] {3, 1});
+    rLMap.put(new int[] {1, -1}, new int[] {1, 1});
+    AllMap.put("RL", rLMap);
   }
 
   private int x;
@@ -32,6 +52,7 @@ public class ShapeAdapter {
   private Board board;
   private int id;
   private int is_valid;
+  private HashMap<int[], int[]> map;
 
   public ShapeAdapter(int my_x, int my_y, char mycolor, char mydirection, Board myboard, int myid) {
     this.x = my_x;
@@ -41,48 +62,62 @@ public class ShapeAdapter {
     this.board = myboard;
     this.shape = Character.toString(this.color) + Character.toString(this.direction);
     this.id = myid;
-    init();
+    Check();
   }
 
-  private void init() {
-    if (RectangleMap.get(shape) != null) {
-      int height = RectangleMap.get(shape)[0];
-      int width = RectangleMap.get(shape)[1];
+  private void Check() {
+    if (AllMap.get(shape) == null) {
+      this.is_valid = 0;
+      System.out.println("\nInvalid direction for this shape. Please retype!");
+    } else {
+      this.map = AllMap.get(shape);
+      CheckAll();
+    }
+  }
 
-      this.is_valid = CheckRectangle(height, width);
-      if (this.is_valid == 1) {
-        Rectangle stack = new Rectangle(height, width, this.color, this.id);
-        stack.putonBoard(this.x, this.y, this.board);
+  private void CheckAll() {
+    for (HashMap.Entry<int[], int[]> entry : this.map.entrySet()) {
+      int x_offset = entry.getKey()[0];
+      int y_offset = entry.getKey()[1];
+      int height = entry.getValue()[0];
+      int width = entry.getValue()[1];
+      CheckRectangle(x_offset, y_offset, height, width);
+      if (this.is_valid == 0) {
+        return;
       }
     }
   }
 
-  private int CheckRectangle(int height, int width) {
-    int is_valid = 0;
-
-    if ((x >= 0 && x < board.getHeighth())
-        && ((x + height - 1) >= 0 && (x + height - 1) < board.getHeighth())
-        && (y >= 0 && y < board.getWidth())
-        && ((y + width - 1) >= 0 && (y + width - 1) < board.getWidth())) {
-      is_valid = 1;
-    }
-    if (is_valid == 0) {
+  private void CheckRectangle(int x_offset, int y_offset, int height, int width) {
+    int new_x = this.x + x_offset;
+    int new_y = this.y + y_offset;
+    if ((new_x >= 0 && new_x < board.getHeighth())
+        && ((new_x + height - 1 >= 0) && (new_x + height - 1 < board.getHeighth()))
+        && ((new_y >= 0) && (new_y < board.getWidth()))
+        && ((new_y + width - 1 >= 0) && (new_y + width - 1 < board.getWidth()))) {
+      this.is_valid = 1;
+    } else {
+      this.is_valid = 0;
       System.out.println("\nInvalid location, stack goes off the grid. Please retype!");
-      return is_valid;
+      return;
     }
 
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
-        if (board.getPixel(x + i, y + j).getOccupied() == 1) {
-          is_valid = 0;
+        if (board.getPixel(new_x + i, new_y + j).getOccupied() == 1) {
+          this.is_valid = 0;
         }
       }
     }
-    if (is_valid == 0) {
+    if (this.is_valid == 0) {
       System.out.println(
           "\nInvalid location, stack collides with other stacks on board. Please retype!");
     }
-    return is_valid;
+  }
+
+  public void Create() {
+    SuperStack stack = new SuperStack(map, color, id);
+    stack.putonBoard(x, y, board);
   }
 
   public int getValid() {

@@ -6,6 +6,7 @@ public class Pixel {
   private int is_missed;
   private char color;
   private int id;
+  private int order; // order in a stack(e.g. 1,2,3
   // private Shape shape;
   // private int start_x;
   // private int start_y;
@@ -29,6 +30,9 @@ public class Pixel {
   public void setID(int i) {
     this.id = i;
   }
+  public void setOrder(int i) {
+    this.order = i;
+  }
 
   public int getOccupied() {
     return this.is_occupied;
@@ -44,6 +48,9 @@ public class Pixel {
   }
   public int getID() {
     return this.id;
+  }
+  public int getOrder() {
+    return this.order;
   }
 
   /*

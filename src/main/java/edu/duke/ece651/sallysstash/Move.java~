@@ -1,0 +1,10 @@
+package edu.duke.ece651.sallysstash;
+
+public class Move {
+  Board board;
+  public Move(Board myboard) {
+    this.board = myboard;
+  }
+
+  public clear(int x, int y) {}
+}

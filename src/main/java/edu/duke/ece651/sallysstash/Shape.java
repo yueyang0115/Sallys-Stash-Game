@@ -3,7 +3,7 @@ package edu.duke.ece651.sallysstash;
 import java.util.HashMap;
 
 interface Shape {
-  void putonBoard(int x, int y, Board board);
+  // void putonBoard(int x, int y, Board board);
 }
 
 class Rectangle implements Shape {
@@ -19,13 +19,16 @@ class Rectangle implements Shape {
     this.id = myid;
   }
 
-  @Override
-  public void putonBoard(int x, int y, Board board) {
+  // @Override
+  public void putonBoard(int x, int y, Board board, int order_begin, int order_flip) {
+    int count = 0;
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
         board.getPixel(x + i, y + j).setOccupied(1);
         board.getPixel(x + i, y + j).setColor(color);
         board.getPixel(x + i, y + j).setID(id);
+        board.getPixel(x + i, y + j).setOrder(order_begin + count * order_flip);
+        count++;
       }
     }
   }
@@ -42,15 +45,17 @@ class SuperStack implements Shape {
     this.id = myid;
   }
 
-  @Override
+  //@Override
   public void putonBoard(int x, int y, Board board) {
     for (HashMap.Entry<int[], int[]> entry : map.entrySet()) {
       int x_offset = entry.getKey()[0];
       int y_offset = entry.getKey()[1];
       int height = entry.getValue()[0];
       int width = entry.getValue()[1];
+      int order_begin = entry.getValue()[2];
+      int order_flip = entry.getValue()[3];
       Rectangle rectangle = new Rectangle(height, width, this.color, this.id);
-      rectangle.putonBoard(x + x_offset, y + y_offset, board);
+      rectangle.putonBoard(x + x_offset, y + y_offset, board, order_begin, order_flip);
     }
   }
 }

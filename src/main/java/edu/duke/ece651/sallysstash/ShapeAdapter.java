@@ -8,39 +8,40 @@ public class ShapeAdapter {
     AllMap = new HashMap<String, HashMap<int[], int[]>>();
 
     HashMap<int[], int[]> gHMap = new HashMap<int[], int[]>();
-    gHMap.put(new int[] {0, 0}, new int[] {1, 2});
-    AllMap.put("GH", gHMap);
+    gHMap.put(new int[] {0, 0},
+        new int[] {1, 2, 1, 1}); //(x_offset,y_offset),(height,width,order,flip_order_flag)
+    AllMap.put("GH", gHMap); // 1+i*1= order
 
     HashMap<int[], int[]> gVMap = new HashMap<int[], int[]>();
-    gVMap.put(new int[] {0, 0}, new int[] {2, 1});
+    gVMap.put(new int[] {0, 0}, new int[] {2, 1, 1, 1});
     AllMap.put("GV", gVMap);
 
     HashMap<int[], int[]> pHMap = new HashMap<int[], int[]>();
-    pHMap.put(new int[] {0, 0}, new int[] {1, 3});
+    pHMap.put(new int[] {0, 0}, new int[] {1, 3, 1, 1});
     AllMap.put("PH", pHMap);
 
     HashMap<int[], int[]> pVMap = new HashMap<int[], int[]>();
-    pVMap.put(new int[] {0, 0}, new int[] {3, 1});
+    pVMap.put(new int[] {0, 0}, new int[] {3, 1, 1, 1});
     AllMap.put("PV", pVMap);
 
     HashMap<int[], int[]> rUMap = new HashMap<int[], int[]>();
-    rUMap.put(new int[] {0, 0}, new int[] {1, 1});
-    rUMap.put(new int[] {1, -1}, new int[] {1, 3});
+    rUMap.put(new int[] {0, 0}, new int[] {1, 1, 1, 1}); // order=1+i*1
+    rUMap.put(new int[] {1, -1}, new int[] {1, 3, 2, 1});
     AllMap.put("RU", rUMap);
 
     HashMap<int[], int[]> rRMap = new HashMap<int[], int[]>();
-    rRMap.put(new int[] {0, 0}, new int[] {3, 1});
-    rRMap.put(new int[] {1, 1}, new int[] {1, 1});
+    rRMap.put(new int[] {1, 1}, new int[] {1, 1, 1, 1});
+    rRMap.put(new int[] {0, 0}, new int[] {3, 1, 2, 1}); // order = 2+i*1
     AllMap.put("RR", rRMap);
 
     HashMap<int[], int[]> rDMap = new HashMap<int[], int[]>();
-    rDMap.put(new int[] {0, 0}, new int[] {1, 3});
-    rDMap.put(new int[] {1, 1}, new int[] {1, 1});
+    rDMap.put(new int[] {0, 0}, new int[] {1, 3, 4, -1}); // order=4-i*1
+    rDMap.put(new int[] {1, 1}, new int[] {1, 1, 1, -1});
     AllMap.put("RD", rDMap);
 
     HashMap<int[], int[]> rLMap = new HashMap<int[], int[]>();
-    rLMap.put(new int[] {0, 0}, new int[] {3, 1});
-    rLMap.put(new int[] {1, -1}, new int[] {1, 1});
+    rLMap.put(new int[] {0, 0}, new int[] {3, 1, 4, -1});
+    rLMap.put(new int[] {1, -1}, new int[] {1, 1, 1, -1});
     AllMap.put("RL", rLMap);
   }
 

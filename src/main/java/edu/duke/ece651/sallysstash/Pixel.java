@@ -7,25 +7,48 @@ public class Pixel {
   private char color;
   private int id;
   private int order; // order in a stack(e.g. 1,2,3
+  private char toself;
+  private char toother;
   // private Shape shape;
   // private int start_x;
   // private int start_y;
 
   public Pixel() {
-    this.color = ' ';
+    // this.color = ' ';
+    this.toself = ' ';
+    this.toother = ' ';
   }
 
   public void setOccupied(int i) {
     this.is_occupied = i;
+    if (i == 0) {
+      this.toself = ' ';
+    }
   }
+
+  public void setMoveHitted(int i) {
+    this.is_hitted = i;
+    if (i == 1) {
+      this.toself = '*';
+    }
+  }
+
   public void setHitted(int i) {
     this.is_hitted = i;
+    if (i == 1) {
+      this.toself = '*';
+      this.toother = this.color;
+    }
   }
   public void setMissed(int i) {
     this.is_missed = i;
+    if (i == 1) {
+      this.toother = 'X';
+    }
   }
   public void setColor(char c) {
     this.color = c;
+    this.toself = this.color;
   }
   public void setID(int i) {
     this.id = i;
@@ -51,6 +74,12 @@ public class Pixel {
   }
   public int getOrder() {
     return this.order;
+  }
+  public char getToself() {
+    return this.toself;
+  }
+  public char getToother() {
+    return this.toother;
   }
 
   /*

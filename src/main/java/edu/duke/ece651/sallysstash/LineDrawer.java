@@ -10,13 +10,7 @@ public class LineDrawer {
   public void toSelf(int line) {
     for (int i = 0; i < board.getWidth(); i++) {
       Pixel mypixel = board.getPixel(line, i);
-      char mychar = ' ';
-      if (mypixel.getOccupied() == 1 && mypixel.getHitted() == 1) {
-        mychar = '*';
-      } else {
-        mychar = mypixel.getColor();
-      }
-      System.out.print(mychar);
+      System.out.print(mypixel.getToself());
       System.out.print('|');
     }
   }
@@ -24,15 +18,7 @@ public class LineDrawer {
   public void toOther(int line) {
     for (int i = 0; i < board.getWidth(); i++) {
       Pixel mypixel = board.getPixel(line, i);
-      char mychar = ' ';
-      if (mypixel.getMissed() == 1) {
-        mychar = 'X';
-      }
-      if (mypixel.getOccupied() == 1 && mypixel.getHitted() == 1) {
-        mychar = mypixel.getColor();
-      }
-
-      System.out.print(mychar);
+      System.out.print(mypixel.getToother());
       System.out.print('|');
     }
   }

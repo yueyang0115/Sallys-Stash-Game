@@ -8,8 +8,8 @@ public class Game {
     Board board_A = new Board();
     Board board_B = new Board();
     Scanner scanner = new Scanner(System.in);
-    Action player_A = init(scanner, board_A, 'A');
-    Action player_B = init(scanner, board_B, 'B');
+    Player player_A = init(scanner, board_A, 'A');
+    Player player_B = init(scanner, board_B, 'B');
 
     player_A.putAllStack('A', 'B');
     player_B.putAllStack('B', 'A');
@@ -29,16 +29,16 @@ public class Game {
     }
   }
 
-  public static Action init(Scanner scanner, Board board, char name) {
-    Action player;
+  public static Player init(Scanner scanner, Board board, char name) {
+    Player player;
     while (true) {
       myUtils.ROLE_CHOOSE(name);
       String input_A = scanner.next();
       if (input_A.equals("1")) {
-        player = new Action(board);
+        player = new Player(board);
         break;
       } else if (input_A.equals("0")) {
-        player = new RobotAction(board);
+        player = new Robot(board);
         break;
       }
       myUtils.IS_INVALID();

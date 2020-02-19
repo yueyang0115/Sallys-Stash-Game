@@ -1,19 +1,32 @@
 package edu.duke.ece651.sallysstash;
 import java.util.HashMap;
-import java.util.Random;
 import java.util.Scanner;
 
-public class RobotAction extends Action {
-  public RobotAction(Board myboard) {
-    super(myboard);
+public class Player {
+  public Board board;
+  public int move_remain;
+  public int sonar_remain;
+  public Player(Board myboard) {
+    this.board = myboard;
+    this.move_remain = 3;
+    this.sonar_remain = 3;
   }
 
-  @Override
+  public void putAllStack(char name, char oppo_name) {
+    myUtils.WELCOME(name, oppo_name);
+    BoardDrawer.drawOne(this.board);
+    putStack(2, 'G', 0, name, "Green");
+    putStack(3, 'P', 2, name, "Purple");
+    putStack(3, 'R', 5, name, "Red");
+    putStack(3, 'B', 8, name, "Blue");
+  }
+
   public void putStack(int num, char color, int id, char name, String colorname) {
     int count = 0;
     while (count != num) {
       myUtils.ASK_PUT(name, colorname);
-      String myString = GenerateThree(color);
+      Scanner input = new Scanner(System.in);
+      String myString = input.next();
       InputHandler myhandler = new InputHandler(myString, this.board);
       myhandler.CheckThreeBits();
       if (myhandler.getValid() == 0) {
@@ -32,14 +45,13 @@ public class RobotAction extends Action {
     }
   }
 
-  @Override
   public void ActionSelect(Board oppo_board, char name, char oppo_name) {
     int action_valid = 0;
     while (action_valid == 0) {
       myUtils.ASK_ACTION(name, move_remain, sonar_remain);
       BoardDrawer.drawTwo(this.board, oppo_board, oppo_name);
       Scanner scanner = new Scanner(System.in);
-      String myString = GenerateOne();
+      String myString = scanner.next();
       if (myString.equals("D") || myString.equals("d")) {
         action_valid = hitBoard(scanner, oppo_board, name, oppo_name);
       } else if ((myString.equals("M") || myString.equals("m")) && this.move_remain != 0) {
@@ -55,12 +67,11 @@ public class RobotAction extends Action {
     }
   }
 
-  @Override
   public int hitBoard(Scanner scanner, Board oppo_board, char name, char oppo_name) {
     myUtils.HIT_WELCOME(name, oppo_name);
     BoardDrawer.drawTwo(this.board, oppo_board, oppo_name);
     myUtils.ASK_HIT(name, oppo_name);
-    String myString = GenerateTwo();
+    String myString = scanner.next();
     InputHandler myhandler = new InputHandler(myString, oppo_board);
     myhandler.CheckTwoBits();
     if (myhandler.getValid() == 0) {
@@ -79,11 +90,10 @@ public class RobotAction extends Action {
     return 1;
   }
 
-  @Override
   public int MoveStack(Scanner scanner, Board oppo_board, char name, char oppo_name) {
     myUtils.ASK_MOVE(name, oppo_name);
     BoardDrawer.drawTwo(this.board, oppo_board, oppo_name);
-    String mychoice = GenerateTwo();
+    String mychoice = scanner.next();
     InputHandler choice = new InputHandler(mychoice, board);
     choice.CheckTwoBits();
     if (choice.getValid() == 0) {
@@ -101,7 +111,7 @@ public class RobotAction extends Action {
     int id = board.getPixel(choice.getCoordinateX(), choice.getCoordinateY()).getID();
 
     myUtils.ASK_MOVE_TO(name);
-    String mylocation = GenerateThree(color);
+    String mylocation = scanner.next();
     InputHandler location = new InputHandler(mylocation, board);
     location.CheckThreeBits();
     if (location.getValid() == 0) {
@@ -122,11 +132,10 @@ public class RobotAction extends Action {
     return 1;
   }
 
-  @Override
   public int SonarStack(Scanner scanner, Board oppo_board, char name, char oppo_name) {
     HashMap<Character, Integer> numMap = new HashMap<Character, Integer>();
     myUtils.ASK_SONAR(name, oppo_name);
-    String input = GenerateTwo();
+    String input = scanner.next();
     InputHandler handler = new InputHandler(input, board);
     handler.CheckTwoBits();
     if (handler.getValid() == 0) {
@@ -141,36 +150,34 @@ public class RobotAction extends Action {
     return 1;
   }
 
-  public static String GenerateOne() {
-    Random rand = new Random();
-    String action_array[] = {"D", "M", "S"};
-    int num = rand.nextInt(3) + 0;
-    String ans = action_array[num];
-    return ans;
-  }
-  public static String GenerateTwo() {
-    Random rand = new Random();
-    int num_0 = rand.nextInt(20) + 0;
-    char x = (char) ('A' + num_0);
-    int y = rand.nextInt(10) + 0;
-    StringBuilder ans = new StringBuilder();
-    ans.append(x).append(y);
-    return ans.toString();
+  public static HashMap<Character, Integer> InsideDiamond(int x, int y, Board oppo_board) {
+    HashMap<Character, Integer> numMap = new HashMap<Character, Integer>();
+    numMap.put('G', 0);
+    numMap.put('P', 0);
+    numMap.put('R', 0);
+    numMap.put('B', 0);
+    for (int i = 0; i < oppo_board.getHeighth(); i++) {
+      for (int j = 0; j < oppo_board.getWidth(); j++) {
+        Pixel mypixel = oppo_board.getPixel(i, j);
+        if ((Math.abs(i - x) * 6 + Math.abs(j - y) * 6 <= 18) && (mypixel.getOccupied() == 1)) {
+          char color = mypixel.getColor();
+          int temp_num = numMap.get(color);
+          numMap.replace(color, temp_num + 1);
+        }
+      }
+    }
+    return numMap;
   }
 
-  public static String GenerateThree(char color) {
-    String ans = GenerateTwo();
-    Random rand = new Random();
-    char direc_array[] = {'H', 'V', 'U', 'D', 'R', 'L'};
-    if (color == 'G' || color == 'P') {
-      int num = rand.nextInt(2) + 0;
-      char z = (char) (direc_array[num]);
-      ans = ans + z;
-    } else {
-      int num = rand.nextInt(4) + 2;
-      char z = (char) (direc_array[num]);
-      ans = ans + z;
+  public int CountHitted() {
+    int hit_count = 0;
+    for (int i = 0; i < board.getHeighth(); i++) {
+      for (int j = 0; j < board.getWidth(); j++) {
+        if (board.getPixel(i, j).getHitted() == 1) {
+          hit_count++;
+        }
+      }
     }
-    return ans;
+    return hit_count;
   }
 }

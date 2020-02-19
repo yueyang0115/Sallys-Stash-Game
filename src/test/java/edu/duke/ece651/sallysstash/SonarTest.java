@@ -15,13 +15,13 @@ public class SonarTest {
     ShapeAdapter adapter = new ShapeAdapter(3, 3, 'G', 'H', board, 1);
     adapter.Create();
     BoardDrawer.drawOne(board);
-    numMap = Action.InsideDiamond(3, 8, board);
+    numMap = Player.InsideDiamond(3, 8, board);
     assertEquals(numMap.get('G'), 0);
 
-    numMap2 = Action.InsideDiamond(3, 6, board);
+    numMap2 = Player.InsideDiamond(3, 6, board);
     assertEquals(numMap2.get('G'), 2);
 
-    numMap3 = Action.InsideDiamond(6, 4, board);
+    numMap3 = Player.InsideDiamond(6, 4, board);
     assertEquals(numMap3.get('G'), 1);
   }
 }

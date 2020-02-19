@@ -33,6 +33,7 @@ public class Move {
           count++;
           if (mypixel.getHitted() == 1) {
             hit_set.add(mypixel.getOrder());
+            mypixel.setHitted(0);
           }
         }
         if (count == num) {

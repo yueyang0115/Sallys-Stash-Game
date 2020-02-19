@@ -9,17 +9,15 @@ public class Game {
     Action player_B = new Action(board_B);
     player_A.putAllStack('A', 'B');
     player_B.putAllStack('B', 'A');
-    int count_A = 0;
-    int count_B = 0;
     int total = 4;
-    while ((count_A != total) && (count_B != total)) {
-      count_A += player_A.hitBoard(board_B, 'A', 'B');
-      if (count_A == total) {
+    while ((player_A.CountHitted() != total) && (player_B.CountHitted() != total)) {
+      player_A.ActionSelect(board_B, 'A', 'B');
+      if (player_B.CountHitted() == total) {
         myUtils.IS_WIN('A');
         break;
       }
-      count_B += player_B.hitBoard(board_A, 'B', 'A');
-      if (count_B == total) {
+      player_B.ActionSelect(board_A, 'B', 'A');
+      if (player_A.CountHitted() == total) {
         myUtils.IS_WIN('B');
       }
     }

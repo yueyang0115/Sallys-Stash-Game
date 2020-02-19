@@ -58,8 +58,8 @@ public class InputHandler {
       }
     }
     this.is_valid = valid_bit_0 & valid_bit_1 & valid_bit_2 & valid_bit_3;
-    if (is_valid == 0) {
-      System.out.println("\nInvalid input, please retype!");
+    if (this.is_valid == 0) {
+      System.out.print("\nInvalid input, please retype!\n");
     }
   }
 

@@ -45,6 +45,26 @@ public class ShapeAdapter {
     rLMap.put(new int[] {0, 0}, new int[] {3, 1, 4, -1});
     rLMap.put(new int[] {1, -1}, new int[] {1, 1, 1, -1});
     AllMap.put("RL", rLMap);
+
+    HashMap<int[], int[]> bUMap = new HashMap<int[], int[]>();
+    bUMap.put(new int[] {0, 0}, new int[] {3, 1, 1, 1});
+    bUMap.put(new int[] {2, 1}, new int[] {3, 1, 4, 1});
+    AllMap.put("BU", bUMap);
+
+    HashMap<int[], int[]> bRMap = new HashMap<int[], int[]>();
+    bRMap.put(new int[] {0, 0}, new int[] {1, 3, 1, 1});
+    bRMap.put(new int[] {-1, 2}, new int[] {1, 3, 4, 1});
+    AllMap.put("BR", bRMap);
+
+    HashMap<int[], int[]> bDMap = new HashMap<int[], int[]>();
+    bDMap.put(new int[] {0, 0}, new int[] {3, 1, 6, -1});
+    bDMap.put(new int[] {2, -1}, new int[] {3, 1, 3, -1});
+    AllMap.put("BD", bDMap);
+
+    HashMap<int[], int[]> bLMap = new HashMap<int[], int[]>();
+    bLMap.put(new int[] {0, 0}, new int[] {1, 3, 6, -1});
+    bLMap.put(new int[] {1, 2}, new int[] {1, 3, 3, -1});
+    AllMap.put("BL", bLMap);
   }
 
   private int x;
@@ -107,7 +127,8 @@ public class ShapeAdapter {
 
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
-        if (board.getPixel(new_x + i, new_y + j).getOccupied() == 1) {
+        if ((board.getPixel(new_x + i, new_y + j).getOccupied() == 1)
+            && (board.getPixel(new_x + i, new_y + j).getID() != this.id)) {
           this.is_valid = 0;
         }
       }
@@ -122,7 +143,6 @@ public class ShapeAdapter {
     SuperStack stack = new SuperStack(map, color, id);
     stack.putonBoard(x, y, board);
   }
-
   public void Move(HashSet<Integer> hit_set) {
     SuperStack stack = new SuperStack(map, color, id);
     stack.movetoBoard(x, y, board, hit_set);

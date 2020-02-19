@@ -30,12 +30,14 @@ public class Player {
       InputHandler myhandler = new InputHandler(myString, this.board);
       myhandler.CheckThreeBits();
       if (myhandler.getValid() == 0) {
+        myUtils.IS_INVALID();
         continue;
       }
 
       ShapeAdapter myadapter = new ShapeAdapter(myhandler.getCoordinateX(),
           myhandler.getCoordinateY(), color, myhandler.getDirection(), this.board, id);
       if (myadapter.getValid() == 0) {
+        myUtils.IS_INVALID();
         continue;
       }
       myadapter.Create();
@@ -61,7 +63,6 @@ public class Player {
         action_valid = SonarStack(scanner, oppo_board, name, oppo_name);
         this.sonar_remain -= action_valid;
       } else {
-        myUtils.IS_INVALID();
         myUtils.GOBACK();
       }
     }
@@ -103,7 +104,6 @@ public class Player {
     Pixel mypixel = board.getPixel(choice.getCoordinateX(), choice.getCoordinateY());
     if (mypixel.getOccupied() == 0) {
       myUtils.NOSTACK();
-      myUtils.GOBACK();
       return 0;
     }
 

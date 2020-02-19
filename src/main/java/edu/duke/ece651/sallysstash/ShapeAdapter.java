@@ -1,6 +1,5 @@
 package edu.duke.ece651.sallysstash;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -91,7 +90,7 @@ public class ShapeAdapter {
   private void Check() {
     if (AllMap.get(shape) == null) {
       this.is_valid = 0;
-      System.out.println("\nInvalid direction for this shape. Please retype!");
+      // System.out.println("\nInvalid direction for this shape. Please retype!");
     } else {
       this.map = AllMap.get(shape);
       CheckAll();
@@ -121,7 +120,7 @@ public class ShapeAdapter {
       this.is_valid = 1;
     } else {
       this.is_valid = 0;
-      System.out.println("\nInvalid location, stack goes off the grid. Please retype!");
+      // System.out.println("\nInvalid location, stack goes off the grid. Please retype!");
       return;
     }
 
@@ -134,8 +133,8 @@ public class ShapeAdapter {
       }
     }
     if (this.is_valid == 0) {
-      System.out.println(
-          "\nInvalid location, stack collides with other stacks on board. Please retype!");
+      // System.out.println("\nInvalid location, stack collides with other stacks on board. Please
+      // retype!");
     }
   }
 

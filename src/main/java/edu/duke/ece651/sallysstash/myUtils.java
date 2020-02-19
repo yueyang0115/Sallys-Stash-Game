@@ -1,5 +1,7 @@
 package edu.duke.ece651.sallysstash;
 
+import java.util.HashMap;
+
 public class myUtils {
   public static void HELLO() {
     System.out.println("Welcome to this Sally's-Stash-Game!");
@@ -61,9 +63,17 @@ public class myUtils {
   }
 
   public static void GOBACK() {
-    System.out.print("Go back to select an action again!\n");
+    System.out.print("\nInvalid input. Go back to select an action again!\n");
   }
-
+  public static void SPECIAL(char name) {
+    System.out.print("\nPlayer " + name + " use a special action.\n");
+  }
+  public static void FOUND(char name, char color, int x, int y) {
+    char locate = (char) ('A' + x);
+    System.out.print(
+        "\nPlayer " + name + " found your " + colormap.get(color) + " stack at " + locate);
+    System.out.print(y + ".\n");
+  }
   public static void IS_MISS() {
     System.out.print("\nYou missed!\n");
   }
@@ -76,6 +86,15 @@ public class myUtils {
   }
 
   public static void NOSTACK() {
-    System.out.print("\nNo stack here.");
+    System.out.print("\nNo stack here. Go back to select an action again.");
+  }
+
+  public static HashMap<Character, String> colormap;
+  static {
+    colormap = new HashMap<Character, String>();
+    colormap.put('G', "Green");
+    colormap.put('P', "Purple");
+    colormap.put('R', "Red");
+    colormap.put('B', "Blue");
   }
 }

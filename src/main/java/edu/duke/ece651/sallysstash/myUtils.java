@@ -42,6 +42,17 @@ public class myUtils {
     System.out.print("\nPlayer " + name + ", where do you want this stack move to?(e.g. A0H)\n");
   }
 
+  public static void ASK_SONAR(char name, char oppo_name) {
+    System.out.print("\nPlayer " + name + ", you are going to sonar the stash on Player "
+        + oppo_name + "'s board. Make sure Player " + oppo_name
+        + " isn't looking!\nWhere is your sonar center?(e.g. A0)\n");
+  }
+  public static void SONAR_RESULT(int G_num, int P_num, int R_num, int B_num) {
+    System.out.print("\n Green stacks occupy " + G_num + " squares\n Purple stacks occupy " + P_num
+        + " squares\n Red stacks occupy " + R_num + " squares\n Blue stacks occupy " + B_num
+        + " square\n");
+  }
+
   public static void GOBACK() {
     System.out.print("Go back to select an action again!\n");
   }

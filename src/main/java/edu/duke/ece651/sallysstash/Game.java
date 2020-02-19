@@ -1,14 +1,16 @@
 package edu.duke.ece651.sallysstash;
 
+import java.util.Scanner;
+
 public class Game {
   public static void main(String[] args) {
-    System.out.print("Welcome to mygame!\n");
+    myUtils.HELLO();
     Board board_A = new Board();
     Board board_B = new Board();
-    // Action player_A = new Action(board_A);
-    // Action player_B = new Action(board_B);
-    RobotAction player_A = new RobotAction(board_A);
-    RobotAction player_B = new RobotAction(board_B);
+    Scanner scanner = new Scanner(System.in);
+    Action player_A = init(scanner, board_A, 'A');
+    Action player_B = init(scanner, board_B, 'B');
+
     player_A.putAllStack('A', 'B');
     player_B.putAllStack('B', 'A');
     int total = 43;
@@ -25,5 +27,22 @@ public class Game {
         myUtils.IS_WIN('B');
       }
     }
+  }
+
+  public static Action init(Scanner scanner, Board board, char name) {
+    Action player;
+    while (true) {
+      myUtils.ROLE_CHOOSE(name);
+      String input_A = scanner.next();
+      if (input_A.equals("1")) {
+        player = new Action(board);
+        break;
+      } else if (input_A.equals("0")) {
+        player = new RobotAction(board);
+        break;
+      }
+      myUtils.IS_INVALID();
+    }
+    return player;
   }
 }

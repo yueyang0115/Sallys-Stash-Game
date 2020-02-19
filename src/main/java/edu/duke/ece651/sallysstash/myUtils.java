@@ -1,6 +1,13 @@
 package edu.duke.ece651.sallysstash;
 
 public class myUtils {
+  public static void HELLO() {
+    System.out.println("Welcome to this Sally's-Stash-Game!");
+  }
+  public static void ROLE_CHOOSE(char name) {
+    System.out.print("\nPlease choose Player " + name
+        + " to be a real human or a computer. Type 1 to be a human, 0 to be a computer.\n");
+  }
   public static void WELCOME(char name, char oppo_name) {
     System.out.print(
         "\n--------------------------------------------------------------------\nPlayer " + name
@@ -62,5 +69,9 @@ public class myUtils {
   }
   public static void IS_WIN(char name) {
     System.out.print("\nPlayer" + name + " win!\n");
+  }
+
+  public static void IS_INVALID() {
+    System.out.println("Invalid input.Please retype.");
   }
 }

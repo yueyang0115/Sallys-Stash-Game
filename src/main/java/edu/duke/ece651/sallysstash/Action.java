@@ -100,6 +100,13 @@ public class Action {
       myUtils.GOBACK();
       return 0;
     }
+    Pixel mypixel = board.getPixel(choice.getCoordinateX(), choice.getCoordinateY());
+    if (mypixel.getOccupied() == 0) {
+      System.out.print("No stack here. ");
+      myUtils.GOBACK();
+      return 0;
+    }
+
     char color = board.getPixel(choice.getCoordinateX(), choice.getCoordinateY()).getColor();
     int id = board.getPixel(choice.getCoordinateX(), choice.getCoordinateY()).getID();
 

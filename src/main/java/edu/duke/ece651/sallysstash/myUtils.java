@@ -72,6 +72,10 @@ public class myUtils {
   }
 
   public static void IS_INVALID() {
-    System.out.println("Invalid input.Please retype.");
+    System.out.print("\nInvalid input.Please retype.");
+  }
+
+  public static void NOSTACK() {
+    System.out.print("\nNo stack here.");
   }
 }

@@ -61,7 +61,7 @@ public class Player {
         action_valid = SonarStack(scanner, oppo_board, name, oppo_name);
         this.sonar_remain -= action_valid;
       } else {
-        System.out.print("\nInvalid input.");
+        myUtils.IS_INVALID();
         myUtils.GOBACK();
       }
     }
@@ -102,7 +102,7 @@ public class Player {
     }
     Pixel mypixel = board.getPixel(choice.getCoordinateX(), choice.getCoordinateY());
     if (mypixel.getOccupied() == 0) {
-      System.out.print("No stack here. ");
+      myUtils.NOSTACK();
       myUtils.GOBACK();
       return 0;
     }

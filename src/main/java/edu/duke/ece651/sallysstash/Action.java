@@ -3,9 +3,9 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Action {
-  private Board board;
-  private int move_remain;
-  private int sonar_remain;
+  public Board board;
+  public int move_remain;
+  public int sonar_remain;
   public Action(Board myboard) {
     this.board = myboard;
     this.move_remain = 3;
@@ -16,12 +16,12 @@ public class Action {
     myUtils.WELCOME(name, oppo_name);
     BoardDrawer.drawOne(this.board);
     putStack(2, 'G', 0, name, "Green");
-    // putStack(3, 'P', 2, name, "Purple");
-    // putStack(3, 'R', 5, name, "Red");
-    // putStack(3, 'B', 8, name, "Blue");
+    putStack(3, 'P', 2, name, "Purple");
+    putStack(3, 'R', 5, name, "Red");
+    putStack(3, 'B', 8, name, "Blue");
   }
 
-  private void putStack(int num, char color, int id, char name, String colorname) {
+  public void putStack(int num, char color, int id, char name, String colorname) {
     int count = 0;
     while (count != num) {
       myUtils.ASK_PUT(name, colorname);
@@ -67,7 +67,7 @@ public class Action {
     }
   }
 
-  private int hitBoard(Scanner scanner, Board oppo_board, char name, char oppo_name) {
+  public int hitBoard(Scanner scanner, Board oppo_board, char name, char oppo_name) {
     myUtils.HIT_WELCOME(name, oppo_name);
     BoardDrawer.drawTwo(this.board, oppo_board, oppo_name);
     myUtils.ASK_HIT(name, oppo_name);
@@ -90,7 +90,7 @@ public class Action {
     return 1;
   }
 
-  private int MoveStack(Scanner scanner, Board oppo_board, char name, char oppo_name) {
+  public int MoveStack(Scanner scanner, Board oppo_board, char name, char oppo_name) {
     myUtils.ASK_MOVE(name, oppo_name);
     BoardDrawer.drawTwo(this.board, oppo_board, oppo_name);
     String mychoice = scanner.next();
@@ -132,7 +132,7 @@ public class Action {
     return 1;
   }
 
-  private int SonarStack(Scanner scanner, Board oppo_board, char name, char oppo_name) {
+  public int SonarStack(Scanner scanner, Board oppo_board, char name, char oppo_name) {
     HashMap<Character, Integer> numMap = new HashMap<Character, Integer>();
     myUtils.ASK_SONAR(name, oppo_name);
     String input = scanner.next();

@@ -8,7 +8,7 @@ import java.util.Scanner;
 import org.junit.jupiter.api.Test;
 
 public class GameTest {
-  @Test
+  /* @Test
   public void test_Player() {
     System.out.println("test for player");
     String filename = "./src/test/resources/player.txt";
@@ -37,49 +37,21 @@ public class GameTest {
         myUtils.IS_WIN('B');
       }
     }
+    }*/
+
+  @Test
+  public void test_robot() throws FileNotFoundException {
+    String filename = "./src/test/resources/robot.txt";
+    System.setIn(new FileInputStream(filename));
+    Game mygame = new Game();
+    mygame.main(null);
   }
 
   @Test
-  public void test_Robot() {
-    System.out.println("test for robot");
-    String filename = "./src/test/resources/robot.txt";
-    try {
-      // String input[] = " ";
-      System.setIn(new FileInputStream(filename));
-    } catch (FileNotFoundException e) {
-      System.out.println("File not exist");
-    }
-    Board board_A = new Board();
-    Board board_B = new Board();
-    Scanner scanner = new Scanner(System.in);
-    Player player_A = Game.init(scanner, board_A, 'A');
-    Player player_B = Game.init(scanner, board_B, 'B');
-    player_A.putAllStack('A', 'B');
-    player_B.putAllStack('B', 'A');
-    int total = 43;
-    while ((player_A.CountHitted() != total) && (player_B.CountHitted() != total)) {
-      player_A.ActionSelect(board_B, 'A', 'B');
-      if (player_B.CountHitted() == total) {
-        myUtils.IS_WIN('A');
-        break;
-      }
-      player_B.ActionSelect(board_A, 'B', 'A');
-      if (player_A.CountHitted() == total) {
-        myUtils.IS_WIN('B');
-      }
-    }
+  public void test_player() throws FileNotFoundException {
+    String filename = "./src/test/resources/pp.txt";
+    System.setIn(new FileInputStream(filename));
+    Game mygame = new Game();
+    mygame.main(null);
   }
-  /*
-  @Test
-  public static void test_main() {
-    // String args[] = {"0", "0"};
-    String filename = "/src/test/resources/robot.txt";
-    try {
-      // String input[] = " ";
-      System.setIn(new FileInputStream(filename));
-      Game.main(null);
-    } catch (FileNotFoundException e) {
-      System.out.println("File not exist");
-    }
-    }*/
 }

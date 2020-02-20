@@ -8,8 +8,9 @@ import java.util.Scanner;
 import org.junit.jupiter.api.Test;
 
 public class GameTest {
-  /*@Test
+  @Test
   public void test_Player() {
+    System.out.println("test for player");
     String filename = "./src/test/resources/player.txt";
     try {
       // String input[] = " ";
@@ -20,8 +21,8 @@ public class GameTest {
     Board board_A = new Board();
     Board board_B = new Board();
     Scanner scanner = new Scanner(System.in);
-    Player player_A = new Player(board_A);
-    Player player_B = new Player(board_B);
+    Player player_A = new Player(scanner, board_A);
+    Player player_B = new Player(scanner, board_B);
     player_A.putAllStack('A', 'B');
     player_B.putAllStack('B', 'A');
     int total = 4;
@@ -36,10 +37,11 @@ public class GameTest {
         myUtils.IS_WIN('B');
       }
     }
-    }*/
+  }
 
   @Test
   public void test_Robot() {
+    System.out.println("test for robot");
     String filename = "./src/test/resources/robot.txt";
     try {
       // String input[] = " ";
@@ -67,17 +69,17 @@ public class GameTest {
       }
     }
   }
-
+  /*
   @Test
   public static void test_main() {
-    String args[] = {"0", "0"};
-    String filename = "./src/test/resources/robot.txt";
+    // String args[] = {"0", "0"};
+    String filename = "/src/test/resources/robot.txt";
     try {
       // String input[] = " ";
       System.setIn(new FileInputStream(filename));
+      Game.main(null);
     } catch (FileNotFoundException e) {
       System.out.println("File not exist");
     }
-    Game.main(args);
-  }
+    }*/
 }

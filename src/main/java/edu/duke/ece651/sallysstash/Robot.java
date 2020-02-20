@@ -4,8 +4,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Robot extends Player {
-  public Robot(Board myboard) {
-    super(myboard);
+  public Robot(Scanner myscanner, Board myboard) {
+    super(myscanner, myboard);
   }
 
   @Override

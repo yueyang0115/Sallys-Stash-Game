@@ -4,10 +4,12 @@ import java.util.Scanner;
 
 public class Player {
   public Board board;
+  public Scanner scanner;
   public int move_remain;
   public int sonar_remain;
-  public Player(Board myboard) {
+  public Player(Scanner myscanner, Board myboard) {
     this.board = myboard;
+    this.scanner = myscanner;
     this.move_remain = 3;
     this.sonar_remain = 3;
   }
@@ -25,8 +27,7 @@ public class Player {
     int count = 0;
     while (count != num) {
       myUtils.ASK_PUT(name, colorname);
-      Scanner input = new Scanner(System.in);
-      String myString = input.next();
+      String myString = this.scanner.next();
       InputHandler myhandler = new InputHandler(myString, this.board);
       myhandler.CheckThreeBits();
       if (myhandler.getValid() == 0) {
@@ -52,15 +53,14 @@ public class Player {
     while (action_valid == 0) {
       myUtils.ASK_ACTION(name, move_remain, sonar_remain);
       BoardDrawer.drawTwo(this.board, oppo_board, oppo_name);
-      Scanner scanner = new Scanner(System.in);
-      String myString = scanner.next();
+      String myString = this.scanner.next();
       if (myString.equals("D") || myString.equals("d")) {
-        action_valid = hitBoard(scanner, oppo_board, name, oppo_name);
+        action_valid = hitBoard(this.scanner, oppo_board, name, oppo_name);
       } else if ((myString.equals("M") || myString.equals("m")) && this.move_remain != 0) {
-        action_valid = MoveStack(scanner, oppo_board, name, oppo_name);
+        action_valid = MoveStack(this.scanner, oppo_board, name, oppo_name);
         this.move_remain -= action_valid;
       } else if ((myString.equals("S") || myString.equals("s")) && this.sonar_remain != 0) {
-        action_valid = SonarStack(scanner, oppo_board, name, oppo_name);
+        action_valid = SonarStack(this.scanner, oppo_board, name, oppo_name);
         this.sonar_remain -= action_valid;
       } else {
         myUtils.GOBACK();

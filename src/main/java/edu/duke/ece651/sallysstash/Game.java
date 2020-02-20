@@ -33,10 +33,10 @@ public class Game {
       myUtils.ROLE_CHOOSE(name);
       String input_A = scanner.next();
       if (input_A.equals("1")) {
-        player = new Player(board);
+        player = new Player(scanner, board);
         break;
       } else if (input_A.equals("0")) {
-        player = new Robot(board);
+        player = new Robot(scanner, board);
         break;
       }
       myUtils.IS_INVALID();
